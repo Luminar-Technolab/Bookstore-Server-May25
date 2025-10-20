@@ -12,9 +12,13 @@ router.post('/register',userController.registerController)
 router.post('/login',userController.loginController)
 //google login
 router.post('/google-login',userController.googleLoginController)
+//home-books
+router.get('/home-books',bookController.getHomeBooksController)
 //add-book
 router.post('/add-book',jwtMiddleware,multerConfig.array('uploadImges',3),bookController.addBookController)
-//home-books
-router.get('/home-books',bookController.getHomeBooks)
+//all-books
+router.get('/all-books',jwtMiddleware,bookController.getAllBooksController)
+//view-book
+router.get('/books/:id/view',jwtMiddleware,bookController.viewBookController)
 
 module.exports = router
