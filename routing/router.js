@@ -20,5 +20,11 @@ router.post('/add-book',jwtMiddleware,multerConfig.array('uploadImges',3),bookCo
 router.get('/all-books',jwtMiddleware,bookController.getAllBooksController)
 //view-book
 router.get('/books/:id/view',jwtMiddleware,bookController.viewBookController)
+//get user books
+router.get('/user-books',jwtMiddleware,bookController.getAllUserBooksController)
+//get user bought books
+router.get('/user-bought-books',jwtMiddleware,bookController.getAllUserBoughtBooksController)
+//delete user books
+router.get('/user-books/:id/remove',jwtMiddleware,bookController.deleteUserBookController)
 
 module.exports = router
