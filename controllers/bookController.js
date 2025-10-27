@@ -106,3 +106,14 @@ exports.deleteUserBookController = async (req,res)=>{
         res.status(500).json(err)
     }
 }
+
+//get all books to admin
+exports.getAllBooksAdminController = async (req,res)=>{
+    console.log("Inside getAllBooksAdminController");
+    try{
+        const allAdminBooks = await books.find()
+        res.status(200).json(allAdminBooks)
+    }catch(err){
+        res.status(500).json(err)
+    }
+}

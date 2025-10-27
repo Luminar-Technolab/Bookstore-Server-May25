@@ -1,6 +1,7 @@
 const users = require('../models/userModel')
 const jwt = require('jsonwebtoken')
 
+//-------------------------USER-------------------------------------
 //register
 exports.registerController = async (req,res)=>{
     console.log("Inside Register API");
@@ -35,7 +36,7 @@ exports.loginController = async (req,res)=>{
         if(existingUser){
             if(existingUser.password == password){
                 //token
-                const token = jwt.sign({userMail:existingUser.email},process.env.JWTSECRET)
+                const token = jwt.sign({userMail:existingUser.email,role:existingUser.role},process.env.JWTSECRET)
                 res.status(200).json({user:existingUser,token})
             }else{
                 res.status(401).json("Invalid email / password...")
@@ -57,7 +58,7 @@ exports.googleLoginController = async (req,res)=>{
         const existingUser = await users.findOne({email})
         if(existingUser){
             //token
-            const token = jwt.sign({userMail:existingUser.email},process.env.JWTSECRET)
+            const token = jwt.sign({userMail:existingUser.email,role:existingUser.role},process.env.JWTSECRET)
             res.status(200).json({user:existingUser,token})
         }else{
            const newUser = new users({
@@ -83,6 +84,19 @@ exports.userProfileEditController = async (req,res)=>{
         const updateUser = await users.findOneAndUpdate({email},{username,email,password,profile:uploadProfile,bio,role},{new:true})
         await updateUser.save()
         res.status(200).json(updateUser)
+    }catch(err){
+        res.status(500).json(err)
+    }
+}
+
+//-------------------------ADMIN---------------------------------
+//get all users
+exports.getAllUsersController = async(req,res)=>{
+    console.log("Inside getAllUsersController");
+    const email = req.payload
+    try{
+        const allUsers = await users.find({email:{$ne:email}})
+        res.status(200).json(allUsers)
     }catch(err){
         res.status(500).json(err)
     }
