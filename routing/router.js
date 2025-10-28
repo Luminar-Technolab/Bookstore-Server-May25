@@ -32,7 +32,11 @@ router.delete('/user-books/:id/remove',jwtMiddleware,bookController.deleteUserBo
 //user profile update
 router.put('/user-profile/edit',jwtMiddleware,multerConfig.single('profile'),userController.userProfileEditController)
 //-------------------------------authorised user - ADMIN -------------------------------------------
+//all user list
 router.get('/all-user',adminJwtMiddleware,userController.getAllUsersController)
+//all book list
 router.get('/admin-all-books',adminJwtMiddleware,bookController.getAllBooksAdminController)
+//approve-book
+router.put('/admin/book/approve',adminJwtMiddleware,bookController.updateBookStatusController)
 
 module.exports = router
