@@ -1,6 +1,6 @@
 const applications = require('../models/applicationModel')
 
-// add application
+// add application - client user
 exports.addApplicationController = async (req,res)=>{
     console.log(`Inside addApplicationController`);
     const {fullname,email,qualification,phone,coverLetter,jobTitle,jobId}  = req.body
@@ -20,7 +20,7 @@ exports.addApplicationController = async (req,res)=>{
         res.status(500).json(err)
     }
 }
-// get appliaction
+// get appliaction - client admin
 exports.getApplicationController = async (req,res)=>{
     console.log(`Inside getApplicationController`);
     
