@@ -39,6 +39,8 @@ router.delete('/user-books/:id/remove',jwtMiddleware,bookController.deleteUserBo
 router.put('/user-profile/edit',jwtMiddleware,multerConfig.single('profile'),userController.userProfileEditController)
 //add-application
 router.post('/application/add',jwtMiddleware,pdfMulterConfig.single('resume'),applicationController.addApplicationController)
+//make payment
+router.post('/make-payment',jwtMiddleware,bookController.makeBookPaymentController)
 
 //-------------------------------authorised user - ADMIN -------------------------------------------
 //all user list
