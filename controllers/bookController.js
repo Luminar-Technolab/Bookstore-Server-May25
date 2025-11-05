@@ -140,7 +140,7 @@ exports.makeBookPaymentController = async (req,res)=>{
     try{
         const updateBookDetails = await books.findByIdAndUpdate({_id},{
             title,author,noOfPages,imageUrl,price,discountPrice,abstract,publisher,language,isbn,category,uploadImg,status:'sold',userMail,bought:email},{new:true})
-        console.log(updateBookDetails);
+        // console.log(updateBookDetails);
         //stripe checkout session
         const line_items = [{
             price_data: {
@@ -166,8 +166,7 @@ exports.makeBookPaymentController = async (req,res)=>{
             cancel_url: 'http://localhost:5173/payement-error'
         });
         console.log(session);
-        res.status(200).json({sessionURL:session.url})
-        
+        res.status(200).json({checkoutSessionURL:session.url})
     }catch(err){
         res.status(500).json(err)
     }
