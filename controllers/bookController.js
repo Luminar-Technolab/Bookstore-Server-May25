@@ -162,8 +162,10 @@ exports.makeBookPaymentController = async (req,res)=>{
             payment_method_types:["card"],
             line_items,
             mode: 'payment',
-            success_url: 'http://localhost:5173/payement-success',
-            cancel_url: 'http://localhost:5173/payement-error'
+            // success_url: 'http://localhost:5173/payement-success',
+            // cancel_url: 'http://localhost:5173/payement-error'
+            success_url: 'https://bookstore-may25.vercel.app/payement-success',
+            cancel_url: 'https://bookstore-may25.vercel.app/payement-error'
         });
         console.log(session);
         res.status(200).json({checkoutSessionURL:session.url})
